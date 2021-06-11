@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    kernel_version: "{{ ansible_kernel }}"
+  tasks:
+   - name: 'kernel version from facts'
+     debug:
+      msg: 'IP address is: {{ansible_all_ipv4_addresses}} Kernel is: {{ansible_kernel}}'
+
+   - name: "set patching_time"
+     set_fact:
+       timestamp: "{{ ansible_date_time.iso8601_basic_short }}"
+
+   - name: get output of df -hPT
+     shell: df -hPT
+     register: df_out
+
+   - name: print df_out
+     debug:
+       var: df_out.stdout
+  

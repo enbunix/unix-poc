@@ -1,0 +1,40 @@
+---
+# tasks file for roles/rhel-patch
+- name: test msg
+  debug:
+    msg: patch roles
+- name: Upgrade packages
+  become: yes
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+    update_only: no
+  register: reg_upgrade_ok
+  when: ev_security_only == "no" and reg_dnf_output_all is defined
+ 
+- name: Patch packages
+  become: yes
+  yum:
+    name: '*'
+    security: yes
+    state: latest
+    update_cache: yes
+    update_only: no
+  register: reg_upgrade_ok
+  when: ev_security_only == "yes" and reg_dnf_output_secu is defined
+ 
+ 
+- name: Print errors if upgrade failed
+  ansible.builtin.debug:
+    msg: "Packages upgrade failed"
+  when: reg_upgrade_ok is not defined
+- name: Check if a reboot is required
+  become: yes
+  command: needs-restarting -r
+  register: reg_reboot_required
+  ignore_errors: yes
+  failed_when: false
+  changed_when: reg_reboot_required.rc != 0
+  notify:
+    - Reboot server 

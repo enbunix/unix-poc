@@ -1,0 +1,10 @@
+- name: checkm mounts
+  hosts: all
+  gather_facts: yes
+  tasks:
+#  - name: check mounts
+#    debug:
+#      msg: "{{ ansible_facts['ansible_mounts']['mount'] }}"
+  - name: Print all available facts
+    ansible.builtin.debug:
+      var: ansible_facts

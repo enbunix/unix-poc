@@ -1,0 +1,51 @@
+---
+# tasks file for roles/rhel-prepatch
+- name: test msg
+  debug:
+    msg: pre-patching roles
+
+- name: check free disk space
+  shell: 'df {{ item }}'
+  with_items:
+    - "{{ mount_points }}"
+  register: df_output
+  failed_when: df_output.stdout.split()[11] | regex_replace('%','') | int > 20
+- name: check df output
+  debug:
+    msg: "{{ df_output }}"
+
+- name: Get packages that can be upgraded
+#  vars:
+#    ev_security_only: no
+#  ansible.builtin.dnf:
+  yum:
+    list: upgrades
+    state: latest
+    update_cache: yes
+  register: reg_dnf_output_all
+  when: ev_security_only == "no"
+ 
+- name: List packages that can be upgraded
+  debug: 
+    msg: "{{ reg_dnf_output_all.results | map(attribute='name') | list }}"
+  when: ev_security_only == "no"
+ 
+ 
+- name: Get packages that can be patched with security fixes
+  become: yes
+#  vars:
+#    ev_security_only: "yes"
+
+#  ansible.builtin.dnf:
+  yum:
+    security: yes
+    list: updates
+    state: latest
+    update_cache: yes
+  register: reg_dnf_output_secu
+  when: ev_security_only == "yes"
+ 
+- name: List packages that can be patched with security fixes
+  debug: 
+    msg: "{{ reg_dnf_output_secu.results | map(attribute='name') | list }}"
+  when: ev_security_only == "yes"
