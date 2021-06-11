@@ -1,0 +1,11 @@
+- name: tast patching
+  become: yes
+  hosts: rhel8
+  tasks:
+    - name: patching
+      yum:
+        name: "*"
+        state: latest
+        security: no
+
+

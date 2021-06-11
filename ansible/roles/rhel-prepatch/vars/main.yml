@@ -1,3 +1,2 @@
 ---
 # vars file for roles/rhel-prepatch
-ev_security_only: yes

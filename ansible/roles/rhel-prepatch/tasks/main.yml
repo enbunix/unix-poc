@@ -18,33 +18,14 @@
 - name: Distribution version
   debug: 
     msg: "{{ ansible_distribution_version}}"
+
 - name: OS information
   debug:
     msg:  OS. {{ ansible_os_family }} '\n' Hostname. {{ ansible_nodename }} Kernel. {{ ansible_kernel }} and Version. {{ ansible_kernel_version }}
 
-- name: Get packages that can be upgraded
-#  vars:
-#    ev_security_only: no
-#  ansible.builtin.dnf:
-  yum:
-    list: upgrades
-    state: latest
-    update_cache: yes
-  register: reg_dnf_output_all
-  when: ev_security_only == "no"
- 
-- name: List packages that can be upgraded
-  debug: 
-    msg: "{{ reg_dnf_output_all.results | map(attribute='name') | list }}"
-  when: ev_security_only == "no"
- 
- 
 - name: Get packages that can be patched with security fixes
-  become: yes
-
-#  ansible.builtin.dnf:
   yum:
-    security: yes
+    security: "{{ ev_security_only }}"
     list: updates
     state: latest
     update_cache: yes

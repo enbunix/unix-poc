@@ -1,29 +1,16 @@
 ---
 # tasks file for roles/rhel-patch
-- name: test msg
-  debug:
-    msg: patch roles
-- name: Upgrade packages
-  become: yes
-  yum:
-    name: '*'
-    state: latest
-    update_cache: yes
-    update_only: no
-  register: reg_upgrade_ok
-  when: ev_security_only == "no" and reg_dnf_output_all is defined
- 
+
 - name: Patch packages
-  become: yes
   yum:
     name: '*'
-    security: yes
+    security: "{{ ev_security_only }}"
     state: latest
     update_cache: yes
-    update_only: no
   register: reg_upgrade_ok
 #  when: ev_security_only == "yes" and reg_dnf_output_secu is defined
- 
+  tags:
+    - update
  
 - name: Print errors if upgrade failed
   ansible.builtin.debug:

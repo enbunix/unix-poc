@@ -2,6 +2,8 @@
 - name: RHEL OS Patching
   hosts: all
   gather_facts: yes
+  vars:
+    ev_security_only: no
   roles:
     - rhel-prepatch
     - rhel-patch
