@@ -33,8 +33,6 @@
  
 - name: Get packages that can be patched with security fixes
   become: yes
-#  vars:
-#    ev_security_only: "yes"
 
 #  ansible.builtin.dnf:
   yum:
@@ -43,9 +41,9 @@
     state: latest
     update_cache: yes
   register: reg_dnf_output_secu
-  when: ev_security_only == "yes"
+#  when:  ev_security_only == "yes"
  
 - name: List packages that can be patched with security fixes
   debug: 
     msg: "{{ reg_dnf_output_secu.results | map(attribute='name') | list }}"
-  when: ev_security_only == "yes"
+#  when: ev_security_only == "yes"
