@@ -22,7 +22,7 @@
     update_cache: yes
     update_only: no
   register: reg_upgrade_ok
-  when: ev_security_only == "yes" and reg_dnf_output_secu is defined
+#  when: ev_security_only == "yes" and reg_dnf_output_secu is defined
  
  
 - name: Print errors if upgrade failed
