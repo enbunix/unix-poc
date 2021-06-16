@@ -1,0 +1,12 @@
+---
+#snow_record variables
+
+sn_username: svc_unix_support
+sn_password: Un1%p@ss0rd
+sn_instance: enbridge.service-now.com
+
+#data variables
+
+#sn_severity: 2
+#sn_priority: 2
+#
