@@ -1,8 +1,0 @@
-plugin: servicenow.servicenow.now
-table: u_unix_patching2
-fields: [u_name,2Cu_q2_date,2Cu_q2_change_request]
-keyed_groups:
-  - key: 2Cu_q2_change_request | lower
-    prefix: ''
-    separator: ''
-
