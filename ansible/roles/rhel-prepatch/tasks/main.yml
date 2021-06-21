@@ -11,10 +11,6 @@
   register: df_output
   failed_when: df_output.stdout.split()[11] | regex_replace('%','') | int > 70
 
-- name: check df output
-  debug:
-    msg: "{{ df_output }}"
-
 - name: Distribution version
   debug: 
     msg: "{{ ansible_distribution_version}}"
