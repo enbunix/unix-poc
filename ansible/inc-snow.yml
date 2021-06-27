@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create new incident
+      servicenow.itsm.incident:
+        state: new
+        urgency: high
+        impact: medium
+        short_description: "Ansible Job {{ lookup('env', 'JOB_ID') }} Failed"
+
+#        assignment_group: Unix_support
+      register: incident
+
+    - name: print incident name
+      debug:
+        msg: "{{ incident }}"
