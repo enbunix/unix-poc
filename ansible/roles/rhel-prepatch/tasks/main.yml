@@ -4,10 +4,24 @@
   set_stats:
     data:
       cr_no: "{{ u_q2_change_request }}"
+  when: u_q2_change_request is defined
 
 - name: test msg
   debug:
     msg: pre-patching roles
+
+- name: Check if apps are sotpped or not
+  find:
+    paths: /var/tmp
+    pattern: 'app-stopped'
+    age: -24h
+  register: app_result
+
+- name: print if apps are stopped or not
+  debug:
+    var: app_result.matched
+  failed_when: app_result.files | length < 1 
+#   when: app-stopped.files | length > 0 
 
 - name: check free disk space
   shell: 'df {{ item }}'

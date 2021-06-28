@@ -10,5 +10,3 @@ sn_severity: 2
 sn_priority: 2
 assignment_group: "Database"
 cmdb_ci: "unix"
-rfc: "CHG0030005"
-CR: CHG0030001
