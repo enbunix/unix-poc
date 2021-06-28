@@ -1,5 +1,10 @@
 ---
 # tasks file for roles/rhel-prepatch
+- name: Set CR no for workflow
+  set_stats:
+    data:
+      cr_no: "{{ u_q2_change_request }}"
+
 - name: test msg
   debug:
     msg: pre-patching roles

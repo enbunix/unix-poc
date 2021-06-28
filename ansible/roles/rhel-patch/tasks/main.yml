@@ -20,7 +20,7 @@
     data:
       patching_ok:  "{{ reg_upgrade_ok }}"
 
-- name: print CR number
+- name: Set CR no for workflow
   set_stats:
     data:
       cr_no: "{{ u_q2_change_request }}" 

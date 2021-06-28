@@ -1,5 +1,5 @@
 ---
 # defaults file for roles/rhel-prepatch
 mount_points:
-  - "/"
   - "/var"
+  - "/"

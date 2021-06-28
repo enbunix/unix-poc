@@ -6,7 +6,7 @@
   - name: include vars
     include_vars: change_request_vars.yml
 
-  - name: Create a change request
+  - name: Create a incident request
     snow_record:
       state: present
       table: incident
@@ -27,5 +27,3 @@
 
   - debug:
       var: new_incident.record.number
-
-
