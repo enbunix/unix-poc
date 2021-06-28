@@ -11,7 +11,7 @@
 #  when: ev_security_only == "yes" and reg_dnf_output_secu is defined
   tags:
     - update
-- name: print output of pating results
+- name: print output of patching results
   debug:
     var: reg_upgrade_ok
 

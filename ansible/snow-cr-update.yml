@@ -7,18 +7,18 @@
   - name: include vars
     include_vars: change_request_vars.yml
 
-  - name: Modify a change request
+  - name: "Modify a change request {{ cr_no }}"
     snow_record:
       state: present
       table: change_request
       username: "{{ sn_username }}"
       password: "{{ sn_password }}"
       instance: "{{ sn_instance }}"
-      number: CHG0030002
+      number: CHG0030001
       data:
         state: 3
         close_code: "Successful"
-#        close_notes: "completed"
+        close_notes: "{{ patching_ok }}"
 
     register: change
 
