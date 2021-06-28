@@ -18,10 +18,10 @@
       data:
         severity: "{{ sn_severity }}"
         priority: "{{ sn_priority }}"
-        short_description: "{{ CR }} implementation failed"
+        short_description: "{{ cr_no }} implementation failed"
         assignment_group: "{{ assignment_group }}"
         cmdb_ci: "unix"
-        rfc: "{{ CR }}"
+        rfc: "{{ cr_no }}"
 
     register: new_incident
 
