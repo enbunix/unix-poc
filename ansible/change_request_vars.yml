@@ -3,6 +3,7 @@
 sn_username: admin
 sn_password: fm0IZRXmWeb8
 sn_instance: dev65250
+snow_host: enbridgetest.service-now.com
 
 #data variables
 ansible_python_interpreter: /usr/bin/python3
