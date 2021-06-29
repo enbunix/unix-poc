@@ -1,13 +1,12 @@
 #now_record variables
 
-sn_username: admin
-sn_password: fm0IZRXmWeb8
-sn_instance: dev65250
-snow_host: enbridgetest.service-now.com
+#sn_username: admin
+#sn_password: fm0IZRXmWeb8
+sn_instance: enbridgetest
 
 #data variables
 ansible_python_interpreter: /usr/bin/python3
 sn_severity: 3
 sn_priority: 2
-assignment_group: "Database"
+assignment_group: "unix_support"
 cmdb_ci: "unix"
