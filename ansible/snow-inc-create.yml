@@ -8,13 +8,13 @@
 
   - name: Create a incident request
     snow_record:
+      host: enbridgetest.service-now.com 
       state: present
       table: incident
 
 #      username: "{{ sn_username }}"
 #      password: "{{ sn_password }}"
 #      instance: "{{ sn_instance }}"
-      host: "{{ snow_host }}"
 
       data:
         severity: "{{ sn_severity }}"
