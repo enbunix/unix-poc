@@ -6,10 +6,6 @@
       cr_no: "{{ u_q2_change_request }}"
   when: u_q2_change_request is defined
 
-- name: test msg
-  debug:
-    msg: pre-patching roles
-
 - name: Check if apps are sotpped or not
   find:
     paths: /var/tmp
@@ -17,26 +13,42 @@
     age: -24h
   register: app_result
 
-- name: print if apps are stopped or not
+- name: Print if apps are stopped or not
   debug:
     var: app_result.matched
   failed_when: app_result.files | length < 1 
-#   when: app-stopped.files | length > 0 
 
 - name: check free disk space
   shell: 'df {{ item }}'
   with_items:
     - "{{ mount_points }}"
   register: df_output
-  failed_when: df_output.stdout.split()[11] | regex_replace('%','') | int > 70
+  failed_when: df_output.stdout.split()[11] | regex_replace('%','') | int > 75
 
-- name: Distribution version
-  debug: 
-    msg: "{{ ansible_distribution_version}}"
+- name: running prepatch info commands
+  shell: |
+    uname -a
+    uptime
+    date
+    adinfo
+    cat /etc/resolv.conf
+    df -hTP
+    df -hP |wc -l
+    cat /etc/fstab
+    ifconfig -a
+    netstat -rn
+    vgdisplay
+    pvdisplay
+    lvscan
+    multipath -ll
+    blkid
+  register: prepatch
+  ignore_errors: true
 
-- name: OS information
-  debug:
-    msg:  OS. {{ ansible_os_family }} '\n' Hostname. {{ ansible_nodename }} Kernel. {{ ansible_kernel }} and Version. {{ ansible_kernel_version }}
+- name: Clean up repo directory
+  file:
+    path: /etc/yum.repos.d/* 
+    state: absent
 
 - name: Get packages that can be patched with security fixes
   yum:
@@ -45,9 +57,7 @@
     state: latest
     update_cache: yes
   register: reg_dnf_output_secu
-#  when:  ev_security_only == "yes"
  
 - name: List packages that can be patched with security fixes
   debug: 
     msg: "{{ reg_dnf_output_secu.results | map(attribute='name') | list }}"
-#  when: ev_security_only == "yes"

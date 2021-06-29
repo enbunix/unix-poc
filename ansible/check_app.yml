@@ -1,9 +1,0 @@
-
-- name: Check if apps are stopped 
-  stat:
-    path: /var/tmp/app-stop 
-  register: register_app
-- name: Print result of stat module
-  debug:
-    msg: "The file or directory exists"
-  when: register_name.stat.exists
