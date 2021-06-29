@@ -11,9 +11,9 @@
       state: present
       table: incident
 
-      username: "{{ sn_username }}"
-      password: "{{ sn_password }}"
-      instance: "{{ sn_instance }}"
+#      username: "{{ sn_username }}"
+#      password: "{{ sn_password }}"
+#      instance: "{{ sn_instance }}"
 
       data:
         severity: "{{ sn_severity }}"
