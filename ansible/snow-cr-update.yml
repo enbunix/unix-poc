@@ -6,6 +6,10 @@
   tasks:
   - name: include vars
     include_vars: change_request_vars.yml
+  
+  - name: print cr no
+    debug:
+      var: "{{ cr_no }}"
 
   - name: "Modify a change request {{ cr_no }}"
     snow_record:
