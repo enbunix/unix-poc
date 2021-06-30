@@ -6,6 +6,10 @@
       cr_no: "{{ u_q2_change_request }}"
   when: u_q2_change_request is defined
 
+-  name: print CR no
+   debug:
+     var: "{{ u_q2_change_request }}"
+
 - name: Check if apps are sotpped or not
   find:
     paths: /var/tmp
