@@ -45,10 +45,20 @@
   register: prepatch
   ignore_errors: true
 
-- name: Clean up repo directory
+- name: Find files in /etc/yum.repos.d/
+  find:
+    paths: /etc/yum.repos.d/
+    patterns: "*"
+  register: files_to_delete
+
+- name: Clean /etc/yum.repos.d/
   file:
-    path: /etc/yum.repos.d/ 
+    path: "{{ item.path }}"
     state: absent
+  with_items: "{{ files_to_delete.files }}"
+
+- name: Run yum clean all
+  command: yum clean all
 
 - name: Get packages that can be patched with security fixes
   yum:
