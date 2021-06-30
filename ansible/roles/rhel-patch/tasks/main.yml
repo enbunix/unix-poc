@@ -8,10 +8,10 @@
     state: latest
     update_cache: yes
   register: reg_upgrade_ok
-#  when: ev_security_only == "yes" and reg_dnf_output_secu is defined
+  when: ansible_distribution == "RedHat"
   tags:
     - update
-- name: print output of patching results
+- name: Print output of patching results
   debug:
     var: reg_upgrade_ok
 

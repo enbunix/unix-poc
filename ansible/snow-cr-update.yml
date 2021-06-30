@@ -11,17 +11,17 @@
     snow_record:
       state: present
       table: change_request
-      username: "{{ sn_username }}"
-      password: "{{ sn_password }}"
+#      username: "{{ sn_username }}"
+#      password: "{{ sn_password }}"
       instance: "{{ sn_instance }}"
-      number: CHG0030001
+      number: "{{ cr_no }}"
       data:
         state: 3
         close_code: "Successful"
         close_notes: "{{ patching_ok }}"
-
     register: change
 
-  - debug:
+  - name: Print change state 
+    debug:
       var: change.record.state
 

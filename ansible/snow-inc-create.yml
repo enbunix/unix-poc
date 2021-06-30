@@ -11,9 +11,6 @@
       instance: "{{ sn_instance }}"
       state: present
       table: incident
-#      username: "{{ sn_username }}"
-#      password: "{{ sn_password }}"
-
       data:
         severity: "{{ sn_severity }}"
         priority: "{{ sn_priority }}"
@@ -21,8 +18,8 @@
         assignment_group: "{{ assignment_group }}"
         cmdb_ci: "unix"
         rfc: "{{ cr_no }}"
-
     register: new_incident
 
-  - debug:
+  - name: Print incident number
+    debug:
       var: new_incident.record.number
