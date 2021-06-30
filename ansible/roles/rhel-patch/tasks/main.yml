@@ -21,10 +21,10 @@
     data:
       patching_ok:  "{{ reg_upgrade_ok }}"
 
-- name: Set CR no for workflow
-  set_stats:
-    data:
-      cr_no: "{{ u_q2_change_request }}" 
+#- name: Set CR no for workflow
+#  set_stats:
+#    data:
+#      cr_no: "{{ u_q2_change_request }}" 
  
 - name: Print errors if upgrade failed
   debug:
