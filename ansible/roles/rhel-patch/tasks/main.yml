@@ -11,6 +11,7 @@
   when: ansible_distribution == "RedHat"
   tags:
     - update
+
 - name: Print output of patching results
   debug:
     var: reg_upgrade_ok

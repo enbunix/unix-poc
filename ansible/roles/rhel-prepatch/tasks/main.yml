@@ -47,7 +47,7 @@
 
 - name: Clean up repo directory
   file:
-    path: /etc/yum.repos.d/* 
+    path: /etc/yum.repos.d/ 
     state: absent
 
 - name: Get packages that can be patched with security fixes
