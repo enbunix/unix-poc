@@ -23,11 +23,11 @@
 #        state: 3
 #        close_code: "Successful"
 #        close_notes: "{{ patching_ok }}"
-        u_implementation_status: "Successful"
-#        work_start: "{{ cr_date }}"
-#        work_end: "{{ cr_date }}"
+        u_implementation_status: "successful"
+        work_start: "{{ cr_date }}"
+        work_end: "{{ cr_date }}"
         u_validation_details: "{{ patching_ok }}"
-#        u_caused_incidents: "No"
+        u_cause_incident: "No"
         u_remediation_required: "Not Required"
         u_cmdb_updated: "No"
     register: change
