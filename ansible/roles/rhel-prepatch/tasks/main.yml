@@ -3,12 +3,12 @@
 - name: Set CR no for workflow
   set_stats:
     data:
-      cr_no: "{{ u_q2_change_request }}"
-  when: u_q2_change_request is defined
+      cr_no: "{{ u_q3_change_request }}"
+  when: u_q3_change_request is defined
 
 -  name: print CR no
    debug:
-     var: "{{ u_q2_change_request }}"
+     var: "{{ u_q3_change_request }}"
 
 - name: Check if apps are sotpped or not
   find:
