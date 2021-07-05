@@ -37,6 +37,6 @@
   register: reg_reboot_required
   ignore_errors: yes
   failed_when: false
-  changed_when: reg_reboot_required.rc != 0 or ansible_distribution_major_version == "6"
+  changed_when: reg_reboot_required.rc != 0
   notify:
     - Reboot server 

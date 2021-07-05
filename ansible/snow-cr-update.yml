@@ -7,9 +7,9 @@
   - name: include vars
     include_vars: change_request_vars.yml
   
-  - name: print cr no
-    debug:
-      var: "{{ cr_no }}"
+#  - name: print cr no
+#    debug:
+#      var: "{{ cr_no }}"
 
   - name: "Modify a change request {{ cr_no }}"
     snow_record:
@@ -21,8 +21,15 @@
       number: "{{ cr_no }}"
       data:
         state: 3
-        close_code: "Successful"
-        close_notes: "{{ patching_ok }}"
+#        close_code: "Successful"
+#        close_notes: "{{ patching_ok }}"
+        u_implementation_status: "Successful"
+        work_start: "{{ cr_date }}"
+        work_end: "{{ cr_date }}"
+        u_validation_details: "{{ patching_ok }}"
+        u_caused_incidents: "No"
+        u_remediation_required: "No"
+        u_cmdb_updated: "No"
     register: change
 
   - name: Print change state 
