@@ -28,7 +28,7 @@
         work_end: "{{ cr_date }}"
         u_validation_details: "{{ patching_ok }}"
         u_caused_incidents: "No"
-        u_remediation_required: "No"
+        u_remediation_required: "Not Required"
         u_cmdb_updated: "No"
     register: change
 
