@@ -34,5 +34,6 @@
 
   - name: Print change state 
     debug:
-      var: change.record.state
+      var: change
+#      var: change.record.state
 
