@@ -15,8 +15,8 @@
     snow_record:
       state: present
       table: change_request
-      username: "{{ sn_username }}"
-      password: "{{ sn_password }}"
+#      username: "{{ sn_username }}"
+#      password: "{{ sn_password }}"
       instance: "{{ sn_instance }}"
       number: "{{ cr_no }}"
       data:
