@@ -1,3 +1,4 @@
 ---
 # vars file for roles/rhel-prepatch
 get_cr: "u_{{ quarter }}_change_request"
+get_date: "u_{{ quarter }}_date"
