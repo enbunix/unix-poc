@@ -4,13 +4,13 @@
   set_stats:
     data:
       cr_no: "{{ u_{{ quarter }}_change_request }}"
-  when: u_{{ quarter }}_change_request is defined
+#  when: u_{{ quarter }}_change_request is defined
 
 - name: Set time for workflow
   set_stats:
     data:
       cr_date: "{{ u_{{ quarter }}_date }}"
-  when: u_{{ quarter }}_date is defined
+#  when: u_{{ quarter }}_date is defined
 
 -  name: print CR no
    debug:
