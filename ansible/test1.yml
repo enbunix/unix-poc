@@ -1,0 +1,48 @@
+---
+- name: Create ticket with notes
+  hosts: localhost
+#  gather_facts: no
+  connection: local
+  vars:
+    time: "{{ lookup('pipe', 'date -d \"1 day ago\" +\"%Y%m%d\"') }}"
+
+  tasks:
+   
+  - name: include vars
+    include_vars: change_request_vars.yml
+  - name: check current date
+    debug: 
+      msg: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
+
+
+  - name: print date
+    debug:
+      var: "{{ time }}"
+
+  - name: Create / update a change request
+    snow_record:
+      state: present
+      table: change_request
+      username: "{{ sn_username }}"
+      password: "{{ sn_password }}"
+      instance: "{{ sn_instance }}"
+      number: "CHG0214060"
+      data:
+#        severity: "{{ sn_severity }}"
+#        priority: "{{ sn_priority }}"
+        short_description: "This is a test opened by Ansible"
+        description: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
+        u_implementation_status: "successful"
+        work_start: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
+        work_end: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
+        u_validation_details: patching_ok
+        u_cause_incident: "No"
+        u_remediation_required: "Not Required"
+        u_cmdb_updated: "No"
+
+        u_remediation_required: "Not Required"
+        u_cmdb_updated: "No"
+    register: new_incident
+
+#  - debug: 
+#      var: new_incident.record

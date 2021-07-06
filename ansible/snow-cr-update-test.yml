@@ -27,7 +27,7 @@
 #        close_notes: "{{ patching_ok }}"
         u_implementation_status: "successful"
 #        work_start: "{{ cr_date }}"
-#        work_end: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
+#        work_end: "{{ cr_date }}"
 #        u_validation_details: "{{ patching_ok }}"
         u_cause_incident: "No"
         u_remediation_required: "Not Required"
