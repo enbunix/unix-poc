@@ -1,13 +1,12 @@
 ---
 # tasks file for roles/rhel-prepatch
 - name: Print CR no
-  debug:
-    var: "{{ get_cr }}"
+  shell: echo {{ get_cr }}
   register: get_cr_no
 
 - name: print only CR
   debug:
-    var: get_cr_no
+    msg: "{{ get_cr_no }}"
 
 - name: Set CR no for workflow
   set_stats:
