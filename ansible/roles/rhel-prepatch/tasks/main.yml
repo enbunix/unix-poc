@@ -12,7 +12,8 @@
 - name: Set CR no for workflow
   set_stats:
     data:
-      cr_no: "{{ get_cr }}"
+      cr_no: "I added this manually"
+#      cr_no: "{{ get_cr }}"
 #  when: u_{{ quarter }}_change_request is defined
 
 - name: Set time for workflow
