@@ -52,7 +52,7 @@
     multipath -ll
     blkid
   register: prepatch
-  ignore_errors: true
+#  ignore_errors: true
 
 - name: Find files in /etc/yum.repos.d/
   find:
