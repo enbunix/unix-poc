@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/rhel-prepatch
 - name: Print CR no
-  shell: echo {{ get_cr }}
+  shell: echo "{{ get_cr }}"
   register: get_cr_no
 
 - name: print only CR
