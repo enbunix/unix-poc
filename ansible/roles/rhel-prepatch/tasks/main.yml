@@ -1,9 +1,5 @@
 ---
 # tasks file for roles/rhel-prepatch
-- name: Get CR no for workflow
-  vars: 
-    get_cr: "u_{{ quarter }}_change_request"
-
 - name: Print CR no
   debug:
     var: "{{ get_cr }}"
