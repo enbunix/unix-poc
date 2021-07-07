@@ -1,12 +1,8 @@
 #now_record variables
 
-sn_username: svc_unix_support
-sn_password: 'Un1%p@ss0rd'
+#sn_username: svc_unix_support
 sn_instance: enbridgetest
 
-#sn_username: admin
-#sn_password: kOwte6EQ9iLO
-#sn_instance: dev64467
 #data variables
 ansible_python_interpreter: /usr/bin/python3
 sn_severity: 3
