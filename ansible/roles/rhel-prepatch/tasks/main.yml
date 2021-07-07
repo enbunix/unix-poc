@@ -38,7 +38,7 @@
   wait_for:
     path: /var/tmp/app-stopped
     sleep: 60
-    timeout: 300
+    timeout: 1800
 
 - name: check free disk space
   shell: 'df {{ item }}'
