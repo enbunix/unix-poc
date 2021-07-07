@@ -19,7 +19,7 @@
 - name: "Artifact results to Tower Workflows"
   set_stats:
     data:
-      patching_ok:  "{{ reg_upgrade_ok }}"
+      patching_ok:  "{{ reg_upgrade_ok.results }}"
 
 #- name: Set CR no for workflow
 #  set_stats:
