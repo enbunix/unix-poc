@@ -18,12 +18,11 @@
 #      username: "{{ sn_username }}"
 #      password: "{{ sn_password }}"
       instance: "{{ sn_instance }}"
-      number: "{{ cr_no }}"
+#      number: "{{ cr_no }}"
+      number: CHG0214018
       data:
-#      record:
         state: 3
-#        close_code: "Successful"
-#        close_notes: "{{ patching_ok }}"
+        phase: "completed"
         u_implementation_status: "successful"
         work_start: "{{ cr_date }}"
         work_end: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
