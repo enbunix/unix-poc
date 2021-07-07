@@ -14,7 +14,7 @@
 
 - name: Print output of patching results
   debug:
-    var: reg_upgrade_ok
+    var: reg_upgrade_ok.results
 
 - name: "Artifact results to Tower Workflows"
   set_stats:
