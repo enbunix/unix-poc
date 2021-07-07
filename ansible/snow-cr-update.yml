@@ -15,20 +15,19 @@
     snow_record:
       state: present
       table: change_request
-      username: "{{ sn_username }}"
-      password: "{{ sn_password }}"
+#      username: "{{ sn_username }}"
+#      password: "{{ sn_password }}"
       instance: "{{ sn_instance }}"
-#      number: "{{ cr_no }}"
-      number: CHG0213963
+      number: "{{ cr_no }}"
       data:
 #      record:
-#        state: 3
+        state: 3
 #        close_code: "Successful"
 #        close_notes: "{{ patching_ok }}"
         u_implementation_status: "successful"
-#        work_start: "{{ cr_date }}"
-#        work_end: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
-#        u_validation_details: "{{ patching_ok }}"
+        work_start: "{{ cr_date }}"
+        work_end: "{{ansible_date_time.date}} {{ansible_date_time.time}}"
+        u_validation_details: "{{ patching_ok }}"
         u_cause_incident: "No"
         u_remediation_required: "Not Required"
         u_cmdb_updated: "No"
