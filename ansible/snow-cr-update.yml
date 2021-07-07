@@ -32,8 +32,7 @@
         u_cmdb_updated: "No"
     register: change
 
-#  - name: Print change state 
-#    debug:
-#      var: change
-#      var: change.record.state
+  - name: Print change state 
+    debug:
+      var: change.record.state
 
