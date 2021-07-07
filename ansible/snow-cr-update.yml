@@ -21,7 +21,7 @@
 #      number: "{{ cr_no }}"
       number: CHG0213963
       data:
-        state: -3
+        state: 3
         phase: "completed"
         u_implementation_status: "successful"
         work_start: "{{ cr_date }}"
@@ -35,4 +35,23 @@
   - name: Print change state 
     debug:
       var: change.record.state
+
+
+  - name: "Close a change request {{ cr_no }}"
+    snow_record:
+      state: present
+      table: change_request
+#      username: "{{ sn_username }}"
+#      password: "{{ sn_password }}"
+      instance: "{{ sn_instance }}"
+#      number: "{{ cr_no }}"
+      number:  CHG0214018
+      data:
+        state: 3
+        phase: "completed"
+    register: change2
+
+  - name: Print change state
+    debug:
+      var: change2.record.state
 
