@@ -1,0 +1,194 @@
+- name: Server configuration
+  hosts: all
+  become: true
+
+  vars:
+    config_values:
+      Default:
+        ntp_server1: ntp.enbridge.com
+        ntp_server2: ntp-dcz.enbridge.com
+        ntp_server3: ntp-seo.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: dns-cac.enbridge.com
+        dns_server2: dns-dcz.enbridge.com
+        dns_server3: dns-seo.enbridge.com
+      Azure:
+        ntp_server1: ntp.enbridge.com
+        ntp_server2: ntp-dcz.enbridge.com
+        ntp_server3: ntp-seo.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: dns-cac.enbridge.com
+        dns_server2: dns-dcz.enbridge.com
+        dns_server3: dns-seo.enbridge.com
+      Edmonton SEO Office:
+        ntp_server1: ntp-seo.enbridge.com
+        ntp_server2: ntp-mlp.enbridge.com
+        ntp_server3: ntp.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: dns-seo.enbridge.com
+        dns_server2: dns-mlp.enbridge.com
+        dns_server3: dns-cac.enbridge.com
+      Edmonton South Office:
+        ntp_server1: ntp-seo.enbridge.com
+        ntp_server2: ntp-mlp.enbridge.com
+        ntp_server3: ntp.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: dns-seo.enbridge.com
+        dns_server2: dns-mlp.enbridge.com
+        dns_server3: dns-cac.enbridge.com
+      Edmonton Manulife Place:
+        ntp_server1: ntp-mlp.enbridge.com
+        ntp_server2: ntp-seo.enbridge.com
+        ntp_server3: ntp.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: dns-mlp.enbridge.com
+        dns_server2: dns-seo.enbridge.com
+        dns_server3: dns-cac.enbridge.com
+      Carrellton:
+        ntp_server1: ntp-dcy.enbridge.com
+        ntp_server2: ntp-dcz.enbridge.com
+        ntp_server3: ntp.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: ntp-dcy.enbridge.com
+        dns_server2: ntp-dcz.enbridge.com
+        dns_server3: dns-cac.enbridge.com
+      Lebanon Office:
+        ntp_server1: ntp-dcz.enbridge.com
+        ntp_server2: ntp-dcy.enbridge.com
+        ntp_server3: ntp.enbridge.com
+        smtp_server: mail.enbridge.com
+        dns_server1: ntp-dcz.enbridge.com
+        dns_server2: ntp-dcy.enbridge.com
+        dns_server3: dns-cac.enbridge.com
+
+  tasks:
+    - name: Set default location
+      set_fact:
+        location: Default
+      when: 
+        - location != "Azure"
+        - location != "Edmonton SEO Office"
+        - location != "Edmonton South Office"
+        - location != "Edmonton Manulife Place"
+        - location != "Carrellton"
+        - location != "Lebanon Office"
+
+    - name: Display new location
+      debug:
+        msg: "{{location}}"
+
+    - name: Set variables
+      set_fact:
+        ntp_srv1: "{{config_values[location]['ntp_server1']}}"
+        ntp_srv2: "{{config_values[location]['ntp_server2']}}"
+        ntp_srv3: "{{config_values[location]['ntp_server3']}}"
+        dns_srv1: "{{config_values[location]['dns_server1']}}"
+        dns_srv2: "{{config_values[location]['dns_server2']}}"
+        dns_srv3: "{{config_values[location]['dns_server3']}}"
+                
+    - name: Display first ntp server
+      debug:
+        msg: "{{ntp_srv1}}"
+
+    - name: Copy resolve.conf for DNS configuration
+      template:
+        src: templates/resolv.conf
+        dest: /etc/resolv.conf
+        backup: true
+
+    - name: Configuration of NTP for RHEL7 or RHEL8
+      block:
+        - name: Remove NTP
+          yum:
+            name: ntpd
+            state: absent
+        - name: Install Chrony
+          yum:
+            name: chrony
+            state: present
+        - name: Copy Chrony config
+          template:
+            src: templates/chrony.conf
+            dest: /etc/chrony.conf
+            backup: true
+          notify:
+            - Restart chrony
+      when: ansible_distribution_major_version == "7" or  ansible_distribution_major_version == "8" 
+
+    - name: Configuration of NTP for RHEL5 or RHEL6
+      block:
+        - name: Install ntp
+          yum:
+            name: ntp
+            state: present
+        - name: Copy NTP config
+          template:
+            src: templates/ntp.conf
+            dest: /etc/ntp.conf
+            backup: true
+          notify:
+            - Restart ntp
+      when: ansible_distribution_major_version == "5" or  ansible_distribution_major_version == "6"
+ 
+    - name: Configuration of SMTP for RHEL6 and above
+      block:
+        - name: Install Postfix
+          yum:
+            name: postfix
+            state: present
+        - name: Ensure Postfix config has relayhost
+          lineinfile:
+            path: /etc/postfix/main.cf
+            regexp: '^relayhost '
+#            insertafter: '^#Listen '
+            line: "relayhost = [{{ config_values[location]['smtp_server'] }}]"
+          notify:
+            - Restart postfix
+
+        - name:  check Postfix service started
+          service:
+            name: postfix
+            state: started
+      when: ansible_distribution_major_version >= '6' 
+
+    - name: Configuration of SMTP for RHEL5
+      block:
+        - name: Install sendmail
+          yum:
+            name: sendmail
+            state: present
+
+        - name: Ensure sendmail config has relayhost
+          lineinfile:
+            path: /etc/mail/sendmail.cf
+            regexp: '^DS'
+            line: "DS[{{ config_values[location]['smtp_server'] }}]"
+          notify:
+            - Restart sendmail
+
+        - name:  check sendmail service started
+          service:
+            name: sendmail
+            state: started
+      when: ansible_distribution_major_version == '5'
+
+  handlers: 
+  - name: Restart chrony
+    service:
+      name: chronyd
+      state: restarted
+
+  - name: Restart ntp
+    service:
+      name: ntpd
+      state: restarted
+
+  - name: Restart sendmail
+    service:
+      name: sendmail
+      state: restarted
+
+  - name: Restart postfix
+    service:
+      name: postfix
+      state: restarted

@@ -21,19 +21,6 @@
       cr_date: "{{ u_q3_date }}"
 #  when: u_{{ quarter }}_date is defined
 
-#- name: Check if apps are sotpped or not
-#  find:
-#    paths: /var/tmp
-#    pattern: 'app-stopped'
-#    age: -24h
-#  register: app_result
-
-#- name: Print if apps are stopped or not
-#  debug:
-#    var: app_result.matched
-#  failed_when: app_result.files | length < 1 
-
-
 - name: Wait until the file /var/tmp/app-stopped is present before continuing
   wait_for:
     path: /var/tmp/app-stopped
