@@ -1,0 +1,59 @@
+---
+# vars file for linux-config
+config_values:
+  Default:
+    ntp_server1: ntp.enbridge.com
+    ntp_server2: ntp-dcz.enbridge.com
+    ntp_server3: ntp-seo.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.28.43.53
+    dns_server2: 10.33.180.53
+    dns_server3: 10.66.180.53
+  Azure:
+    ntp_server1: ntp.enbridge.com
+    ntp_server2: ntp-dcz.enbridge.com
+    ntp_server3: ntp-seo.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.28.43.53
+    dns_server2: 10.33.180.53
+    dns_server3: 10.66.180.53
+  Edmonton SEO Office:
+    ntp_server1: ntp-seo.enbridge.com
+    ntp_server2: ntp-mlp.enbridge.com
+    ntp_server3: ntp.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.66.180.53
+    dns_server2: 10.72.180.53
+    dns_server3: 10.28.43.53
+  Edmonton South Office:
+    ntp_server1: ntp-seo.enbridge.com
+    ntp_server2: ntp-mlp.enbridge.com
+    ntp_server3: ntp.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.66.180.53
+    dns_server2: 10.72.180.53
+    dns_server3: 10.28.43.53
+  Edmonton Manulife Place:
+    ntp_server1: ntp-mlp.enbridge.com
+    ntp_server2: ntp-seo.enbridge.com
+    ntp_server3: ntp.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.72.180.53
+    dns_server2: 10.66.180.53
+    dns_server3: 10.28.43.53
+  Carrellton:
+    ntp_server1: ntp-dcy.enbridge.com
+    ntp_server2: ntp-dcz.enbridge.com
+    ntp_server3: ntp.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.97.180.53
+    dns_server2: 10.33.180.53
+    dns_server3: 10.28.43.53
+  Lebanon Office:
+    ntp_server1: ntp-dcz.enbridge.com
+    ntp_server2: ntp-dcy.enbridge.com
+    ntp_server3: ntp.enbridge.com
+    smtp_server: mail.enbridge.com
+    dns_server1: 10.33.180.53
+    dns_server2: 10.97.180.53
+    dns_server3: 10.28.43.53
