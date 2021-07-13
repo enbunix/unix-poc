@@ -27,12 +27,12 @@
     sleep: 60
     timeout: 1800
 
-- name: check free disk space
-  shell: 'df {{ item }}'
-  with_items:
-    - "{{ mount_points }}"
-  register: df_output
-  failed_when: df_output.stdout.split()[11] | regex_replace('%','') | int > 75
+#- name: check free disk space
+#  shell: 'df {{ item }}'
+#  with_items:
+#    - "{{ mount_points }}"
+#  register: df_output
+#  failed_when: df_output.stdout.split()[11] | regex_replace('%','') | int > 75
 
 - name: running prepatch info commands
   shell: |
@@ -53,9 +53,15 @@
     blkid
   register: prepatch
   ignore_errors: true
+
 - name: Print result of prepatch
   debug:
     var: prepatch
+
+- name: Create backup directory for /etc/yum.repos.d/
+  copy:
+    src: /etc/yum.repos.d/
+    dest: /etc/yum.repos.d/backup
 
 - name: Find files in /etc/yum.repos.d/
   find:
