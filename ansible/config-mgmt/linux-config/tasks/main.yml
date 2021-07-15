@@ -1,5 +1,6 @@
 ---
 # tasks file for linux-config
+#  Oleg was here
 - name: Set default location
   set_fact:
     location: Default
