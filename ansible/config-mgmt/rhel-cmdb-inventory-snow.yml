@@ -15,7 +15,3 @@ group_by:
     includes:
       -  RedHatEnterpriseServer
       -  Linux Red Hat
-#  sys_class_name:
-
-#    includes: 
-#      - cmdb_ci_linux_server
