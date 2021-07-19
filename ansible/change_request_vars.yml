@@ -8,4 +8,3 @@ ansible_python_interpreter: /usr/bin/python3
 sn_severity: 3
 sn_priority: 2
 assignment_group: "Unix Server Support"
-cmdb_ci: "unix"

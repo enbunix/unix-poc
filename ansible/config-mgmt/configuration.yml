@@ -1,6 +1,0 @@
-- name: Server configuration
-  hosts: all
-  become: true
-
-  roles:
-    - linux-config
