@@ -1,25 +1,13 @@
 ---
-# tasks file for roles/rhel-prepatch
-#- name: Print CR no
-#  shell: echo "{{ get_cr }}"
-#  register: get_cr_no
-
-#- name: Print only CR
-#  debug:
-#    msg: "{{ get_cr_no }}"
-
 - name: Set CR no for workflow
   set_stats:
     data:
       cr_no: "{{ u_q3_change_request }}" 
-#      cr_no: "{{ get_cr }}"
-#  when: u_{{ quarter }}_change_request is defined
 
 - name: Set time for workflow
   set_stats:
     data:
       cr_date: "{{ u_q3_date }}"
-#  when: u_{{ quarter }}_date is defined
 
 - name: Wait until the file /var/tmp/app-stopped is present before continuing
   wait_for:
