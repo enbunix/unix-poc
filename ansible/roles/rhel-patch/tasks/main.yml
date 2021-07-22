@@ -21,15 +21,16 @@
     data:
       patching_ok:  "{{ reg_upgrade_ok.results }}"
 
-#- name: Set CR no for workflow
-#  set_stats:
-#    data:
-#      cr_no: "{{ u_q2_change_request }}" 
- 
 - name: Print errors if upgrade failed
   debug:
     msg: "Packages upgrade failed"
   when: reg_upgrade_ok is not defined
+
+
+- name: Clean /var/tmp/app-stopped for next run
+  file:
+    path: /var/tmp/app-stopped
+    state: absent
 
 - name: Check if a reboot is required
   become: yes
