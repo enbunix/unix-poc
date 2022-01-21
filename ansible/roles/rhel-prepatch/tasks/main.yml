@@ -2,12 +2,12 @@
 - name: Set CR no for workflow
   set_stats:
     data:
-      cr_no: "{{ u_q4_change_request }}" 
+      cr_no: "{{ u_q1_change_request }}" 
 
 - name: Set time for workflow
   set_stats:
     data:
-      cr_date: "{{ u_q4_date }}"
+      cr_date: "{{ u_q1_date }}"
 
 - name: Wait until the file /var/tmp/app-stopped is present before continuing
   wait_for:
